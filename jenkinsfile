@@ -19,12 +19,12 @@ pipeline {
         }
        stage('Generate Test Reports') {
            steps {
-               publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/BankingProject/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+               publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/Banking-Project/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
                     }
             }
        stage('Create Docker Image') {
            steps {
-               sh 'docker build -t cbabu85/banking-project-demo:3.0 .'
+               sh 'docker build -t faris7/banking-project-demo:1.0 .'
                     }
                 }
        stage('Docker-Login') {
@@ -36,7 +36,7 @@ pipeline {
                 }
        stage('Push-Image') {
            steps {
-               sh 'docker push cbabu85/banking-project-demo:3.0'
+               sh 'docker push faris7/banking-project-demo:2.0'
                      }
                 }
        stage('Config & Deployment') {
