@@ -52,18 +52,15 @@ pipeline {
             }
         }
 
-        stage('Config & Deployment') {
+       stage('Config & Deployment') {
             steps {
-                withCredentials([
-                    aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS-ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'),
-                    file(credentialsId: 'terraform-pem-id', variable: 'PEM_FILE') // Load `terraform.pem` from credentials
-                ]) {
+                
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AWS-ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')]) {
                     dir('terraform-files') {
-                        // Use `PEM_FILE` variable loaded from credentials
-                        sh 'chmod 600 terraform.pem'
-                        sh 'terraform init'
-                        sh 'terraform validate'
-                        sh 'terraform apply --auto-approve'
+                    sh 'sudo chmod 600 terraform.pem'
+                    sh 'terraform init'
+                    sh 'terraform validate'
+                    sh 'terraform apply --auto-approve'
                     }
                 }
             }
