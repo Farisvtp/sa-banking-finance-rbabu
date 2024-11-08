@@ -73,16 +73,5 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            // Clean up Docker credentials after execution
-            sh 'docker logout'
-        }
-        success {
-            echo 'Pipeline executed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed. Check logs for details.'
-        }
-    }
+   
 }
