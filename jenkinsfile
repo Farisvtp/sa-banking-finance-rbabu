@@ -60,7 +60,7 @@ pipeline {
                 ]) {
                     dir('terraform-files') {
                         // Use `PEM_FILE` variable loaded from credentials
-                        sh 'chmod 600 $PEM_FILE'
+                        sh 'chmod 600 terraform.pem'
                         sh 'terraform init'
                         sh 'terraform validate'
                         sh 'terraform apply --auto-approve'
